@@ -26,20 +26,20 @@ function copyContent() {
         })
         .catch((error) => {
             alert(`Текст не скопирован ${error}`);
-        })
+        });
 }
 
 function escapeText(text) {
-    var map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-    return text.replace(/[&<>"']/g, function (m) {
+    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+    return text.replace(/[&<>"']/g, (m) => {
         return map[m];
     });
 }
 
-function pasteListener(event) {
-    event.preventDefault();
-	var text = (event.originalEvent || event).clipboardData.getData("text/plain");
-	document.execCommand("insertHtml", false, escapeText(text));
+function pasteListener(e) {
+    e.preventDefault();
+    const text = (e.originalEvent || e).clipboardData.getData("text/plain");
+    document.execCommand("insertHtml", false, escapeText(text));
 }
 
 onMounted(() => {
